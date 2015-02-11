@@ -1,7 +1,9 @@
 var anagram = function(word, word_list) {
+  var word_list_array = word_list.split(", ");
   var word_letters = word.toLowerCase().split("").sort().join("");
   var matching_words_array = [];
-  word_list.forEach( function(possibility) {
+  word_list_array.forEach( function(possibility) {
+    // debugger;
     var p_letters = possibility.toLowerCase().split("").sort().join("");
     if (word_letters === p_letters) {
       matching_words_array.push(possibility);
@@ -19,3 +21,17 @@ var anagram = function(word, word_list) {
   });
   return matching_words_array.join(", ");
 };
+
+$(document).ready(function(){
+  $("form#anagram").submit(function(event){
+    var word = $("input#word").val();
+    var word_list = $("input#word_list").val();
+    // var result = anagram("star", "rats");
+    var result = anagram(word, word_list);
+
+   $(".results1").text(result);
+
+   $("#results").show();
+   event.preventDefault();
+  });
+});
